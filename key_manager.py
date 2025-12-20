@@ -9,3 +9,8 @@ def generar_clave(nom_fitxer = "clave.key"):
     return clave
 clave = generar_clave()
 print(f"Clave guardada correctamente")
+
+def cargar_clave(nom_fitxer = "clave.key"):
+    with open (nom_fitxer, "rb") as f:
+        clave_cargada = f.read()
+    return clave_cargada
