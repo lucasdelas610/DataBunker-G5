@@ -2,7 +2,11 @@
 
 Trabajo hecho por:
 
-Anna Gual Poblet Lena Boajram Makarem Andrea Olivas Vazquez Lucas Delas De Esteban Pol Latorre Cañisà
+Anna Gual Poblet 
+Lena Boajram Makarem 
+Andrea Olivas Vazquez 
+Lucas Delas De Esteban 
+Pol Latorre Cañisà
 
 Sprint: Claves y Cifrado (Tareas 12-23) En esta parte del trabajo hemos hecho lo necesario para crear la clave de seguridad y encriptar los archivos.
 
