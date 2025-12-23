@@ -24,4 +24,8 @@ pip install cryptography Cómo probarlo Hemos hecho unos scripts para ver si fun
 
 Prueba de la clave: Ejecuta la función de generar clave. Debería aparecer el archivo key.key en la carpeta.
 
+<<<<<<< HEAD
 Prueba de cifrado: Intenta cifrar un archivo de prueba. Si al abrir el archivo resultante salen símbolos raros, es que ha funcionado bien.
+=======
+Prueba de cifrado: Intenta cifrar un archivo de prueba. Si al abrir el archivo resultante salen símbolos raros, es que ha funcionado bien.
+>>>>>>> origin/main
