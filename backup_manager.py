@@ -3,6 +3,20 @@
 import zipfile
 import os
 
+def comprimir_carpeta(carpeta, zip_final):
+    if os.path.exists(carpeta) == False:
+        print("Error: La carpeta no existe.")
+        return False 
+    zip_1 = zipfile.ZipFile(zip_final, 'w')
+    for archivo in os.listdir(carpeta):
+        ruta_completa = carpeta + "/" + archivo
+        if os.path.isfile(ruta_completa):# comprueba que es un archivo y no falle
+            zip_1.write(ruta_completa, arcname=archivo)
+    zip_1.close()
+    
+    print("Carpeta comprimida correctamente en: " + zip_final)
+    return True 
+
 def restaurar_copia(zip_arxiu, carpeta_desti): #FJ-20
     if os.path.exists(zip_arxiu): #se comprueba si existe el archivo
         arxiu= zipfile.ZipFile(zip_arxiu, 'r')
