@@ -2,6 +2,8 @@
 
 import zipfile
 import os
+import crypto_utils
+
 
 def comprimir_carpeta(carpeta, zip_final):
     if os.path.exists(carpeta) == False:
@@ -38,3 +40,41 @@ def verificar_restauracio(carpeta_desti): #FJ-21
     else:
         print("Verificació fallida, la carpeta no existeix.")
         return False
+
+
+
+# FJ-26
+def restaurar_copia(zip_arxiu, carpeta_desti, clave=None):
+    # Variable para saber cual es el archivo que se descomrime
+    archivo_para_descomprimir = zip_arxiu
+    
+
+    if zip_arxiu.endswith(".enc"):
+        print("He visto que es un archivo cifrado (.enc).")
+        
+        if clave == None:
+            print("Fallo: Necesito la clave para poder abrirlo.")
+            return
+
+        # Llamo la funcion de descifrar 
+        archivo_desbloqueado = crypto_utils.descifrar_archivo(zip_arxiu, clave)
+        
+        # Si me devuelve un archivo valido, actualizo la variable
+        if archivo_desbloqueado != None:
+            archivo_para_descomprimir = archivo_desbloqueado
+        else:
+            print("No se ha podido descifrar.")
+            return
+
+    # descomprimir
+    # Compruebo que el archivo sea el original o el descifrado exista
+    if os.path.exists(archivo_para_descomprimir):
+        print("Descomprimiendo el ZIP...")
+        
+        mi_zip = zipfile.ZipFile(archivo_para_descomprimir, 'r')
+        mi_zip.extractall(carpeta_desti)
+        mi_zip.close()
+        
+        print("Restauracion completada en la carpeta: " + carpeta_desti)
+    else:
+        print("Error: No encuentro el archivo zip para descomprimir.")
