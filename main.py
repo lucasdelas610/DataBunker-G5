@@ -35,3 +35,8 @@ else:
     print("No se ha podido probar el cifrado porque fallo la clave")
 
 print("Fin de las pruebas")
+
+
+def pedir_nombre_archivo(): # FJ-27
+    nombre = input("Escribe el nombre del archivo: ")
+    return nombre
