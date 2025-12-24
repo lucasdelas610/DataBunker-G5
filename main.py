@@ -40,3 +40,6 @@ print("Fin de las pruebas")
 def pedir_nombre_archivo(): # FJ-27
     nombre = input("Escribe el nombre del archivo: ")
     return nombre
+
+def eliminar_archivo(ruta_archivo): #FJ-18
+    os.remove(ruta_archivo)
