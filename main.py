@@ -53,3 +53,27 @@ clave = key_manager.cargar_clave()
 crypto_utils.descifrar_archivo(archivo_encriptado, clave)
 
 backup_manager.restaurar_copia("backup.zip", "restaurado")
+
+todo_ok = True
+
+# 1. Generar / cargar clave
+clave = key_manager.cargar_clave()
+if clave is None:
+    todo_ok = False
+
+# 2. Cifrar archivo
+if todo_ok:
+    if crypto_utils.cifrar_archivo("test_secreto.txt", clave) is None:
+        todo_ok = False
+
+# 3. Restaurar copia
+if todo_ok:
+    resultado = backup_manager.restaurar_copia("backup.zip", "restaurado", clave)
+    if resultado is False:
+        todo_ok = False
+
+# 👉 MENSAJE FINAL SOLO SI TODO OK
+if todo_ok:
+    print("✅ Todos los procesos se completaron correctamente.")
+else:
+    print("❌ Hubo errores durante el proceso.")
