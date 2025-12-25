@@ -43,3 +43,13 @@ def pedir_nombre_archivo(): # FJ-27
 
 def eliminar_archivo(ruta_archivo): #FJ-18
     os.remove(ruta_archivo)
+
+#FJ-29
+import backup_manager
+
+archivo_encriptado = "test_secreto.txt.enc"
+clave = key_manager.cargar_clave()
+
+crypto_utils.descifrar_archivo(archivo_encriptado, clave)
+
+backup_manager.restaurar_copia("backup.zip", "restaurado")
