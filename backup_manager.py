@@ -5,20 +5,12 @@ import os
 import crypto_utils
 
 
-def comprimir_carpeta(carpeta, zip_final):
+def comprimir_carpeta(carpeta, zip_final): # Validar que existen los archivos
     if os.path.exists(carpeta) == False:
-        print("Error: La carpeta no existe.")
-        return False 
-    zip_1 = zipfile.ZipFile(zip_final, 'w')
-    for archivo in os.listdir(carpeta):
-        ruta_completa = carpeta + "/" + archivo
-        if os.path.isfile(ruta_completa):# comprueba que es un archivo y no falle
-            zip_1.write(ruta_completa, arcname=archivo)
-    zip_1.close()
-    
-    print("Carpeta comprimida correctamente en: " + zip_final)
-    return True 
-
+        print(" La carpeta no existe.")
+        with open("historial.txt", "a") as f:
+            f.write(" La carpeta a comprimir no existe.")
+        return False
 
 def verificar_restauracio(carpeta_desti): #FJ-21
     if os.path.exists(carpeta_desti):
