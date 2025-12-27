@@ -11,8 +11,7 @@ def generar_clave(nom_fitxer = "clave.key"):
     with open (nom_fitxer, "wb") as f:
         f.write(clave)
     return clave
-clave = generar_clave()
-print(f"Clave guardada correctamente")
+
 
 def cargar_clave(nom_fitxer = "clave.key"):
     if os.path.exists(nom_fitxer) == False:

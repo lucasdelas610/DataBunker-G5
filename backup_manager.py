@@ -19,14 +19,6 @@ def comprimir_carpeta(carpeta, zip_final):
     print("Carpeta comprimida correctamente en: " + zip_final)
     return True 
 
-def restaurar_copia(zip_arxiu, carpeta_desti): #FJ-20
-    if os.path.exists(zip_arxiu): #se comprueba si existe el archivo
-        arxiu= zipfile.ZipFile(zip_arxiu, 'r')
-        arxiu.extractall(carpeta_desti) #se extrae el contenido del archivo
-        arxiu.close()
-        print(f"Restauració completada a {carpeta_desti}")
-    else:
-        print(f"Error, no s'ha trobat l'arxiu '{zip_arxiu}'") #si no existe el archivo, printea error
 
 def verificar_restauracio(carpeta_desti): #FJ-21
     if os.path.exists(carpeta_desti):
@@ -42,39 +34,20 @@ def verificar_restauracio(carpeta_desti): #FJ-21
         return False
 
 
+def restaurar_copia(zip_arxiu, carpeta_desti):# Validar formato ZIP
+    if zipfile.is_zipfile(zip_arxiu) == False:
+        print("Error: El archivo no es un ZIP válido o está roto.")
+        with open("historial.txt", "a") as f:
+            f.write("ERROR: Intento de restaurar un zip corrupto.")
+        return
 
-# FJ-26
-def restaurar_copia(zip_arxiu, carpeta_desti, clave=None):
-    # Variable para saber cual es el archivo que se descomrime
-    archivo_para_descomprimir = zip_arxiu
+    arxiu = zipfile.ZipFile(zip_arxiu, 'r')
+    arxiu.extractall(carpeta_desti) 
+    arxiu.close()
     
-
-    if zip_arxiu.endswith(".enc"):
-        print("He visto que es un archivo cifrado (.enc).")
-        
-        if clave == None:
-            print("Fallo: Necesito la clave para poder abrirlo.")
-            return
-
-        # Llamo la funcion de descifrar 
-        archivo_desbloqueado = crypto_utils.descifrar_archivo(zip_arxiu, clave)
-        
-        # Si me devuelve un archivo valido, actualizo la variable
-        if archivo_desbloqueado != None:
-            archivo_para_descomprimir = archivo_desbloqueado
-        else:
-            print("No se ha podido descifrar.")
-            return
-
-    # descomprimir
-    # Compruebo que el archivo sea el original o el descifrado exista
-    if os.path.exists(archivo_para_descomprimir):
-        print("Descomprimiendo el ZIP...")
-        
-        mi_zip = zipfile.ZipFile(archivo_para_descomprimir, 'r')
-        mi_zip.extractall(carpeta_desti)
-        mi_zip.close()
-        
-        print("Restauracion completada en la carpeta: " + carpeta_desti)
-    else:
-        print("Error: No encuentro el archivo zip para descomprimir.")
+    # Llamamos a la función para comprobar que todo esta bien
+    verificar_restauracio(carpeta_desti)
+    
+    print(f"Restauració completada a {carpeta_desti}")
+    with open("historial.txt", "a") as f:
+        f.write("EXITO: Restauracion completada.")
