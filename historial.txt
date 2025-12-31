@@ -1,0 +1,3 @@
+ La carpeta a comprimir no existe
+ERROR: Intento de restaurar un zip corrupto.
+ERROR: Intento de restaurar un zip corrupto.

@@ -1,14 +1,60 @@
 # Punto de entrada del programa
 import os
 import zipfile
-
-
-
+import backup_manager
 
 
 # FJ-22
 import key_manager
 import crypto_utils
+
+#FJ-38
+
+def menu():
+    while True:
+        print("\n--- MENÚ DE SEGURIDAD ---")
+        print("1. Generar Clave")
+        print("2. Cifrar Archivo")
+        print("3. Descifrar Archivo")
+        print("4. Crear Backup (Zip)")
+        print("5. Restaurar Backup")
+        print("0. Salir")
+        
+        opcion = input("\nSelecciona una opción: ")
+
+        if opcion == "1":
+            key_manager.generar_clave()
+        
+        elif opcion == "2":
+            archivo = input("Archivo a cifrar: ")
+            clave = key_manager.cargar_clave()
+            if clave:
+                crypto_utils.cifrar_archivo(archivo, clave)
+
+        elif opcion == "3":
+            archivo = input("Archivo .enc a descifrar: ")
+            clave = key_manager.cargar_clave()
+            if clave:
+                crypto_utils.descifrar_archivo(archivo, clave)
+
+        elif opcion == "4":
+            carpeta = input("Carpeta para backup: ")
+            destino = input("Nombre del archivo (ej: copia.zip): ")
+            backup_manager.comprimir_carpeta(carpeta, destino)
+
+        elif opcion == "5":
+            archivo_zip = input("Archivo ZIP a restaurar: ")
+            destino = input("Carpeta de destino: ")
+            backup_manager.restaurar_copia(archivo_zip, destino)
+
+        elif opcion == "0":
+            print("Saliendo...")
+            break
+        else:
+            print("Opción no válida.")
+menu()
+
+
 
 
 # 1. Pruebo si la clave se genera bien
@@ -72,8 +118,9 @@ if todo_ok:
     if resultado is False:
         todo_ok = False
 
-# 👉 MENSAJE FINAL SOLO SI TODO OK
+# MENSAJE FINAL SOLO SI TODO OK
 if todo_ok:
-    print("✅ Todos los procesos se completaron correctamente.")
+    print(" Todos los procesos se completaron correctamente.")
 else:
-    print("❌ Hubo errores durante el proceso.")
+    print("Hubo errores durante el proceso.")
+
