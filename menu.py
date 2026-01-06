@@ -13,7 +13,12 @@ def mostrar_menu():
         print("5. Restaurar Backup")
         print("0. Salir")
         
-        opcion = input("Selecciona una opcion: ")
+        # Uso strip() para que no fallen los espacios
+        opcion = input("Selecciona una opcion: ").strip()
+
+        # Si le das al Enter sin escribir nada, vuelve a empezar
+        if opcion == "":
+            continue
 
         if opcion == "1":
             key_manager.generar_clave()
@@ -46,20 +51,30 @@ def mostrar_menu():
                     print("Error: El archivo no existe.")
 
         elif opcion == "4":
-            carpeta = input("Carpeta para backup: ")
+            carpeta = input("Carpeta para backup: ").strip()
             if os.path.exists(carpeta):
-                destino = input("Nombre del archivo: ")
-                backup_manager.comprimir_carpeta(carpeta, destino)
+                destino = input("Nombre del archivo: ").strip()
+                
+                # obligamos a que el nombre tenga algo escrito
+                if len(destino) > 0:
+                    backup_manager.comprimir_carpeta(carpeta, destino)
+                else:
+                    print("Error, el nombre del archivo no puede estar vacio.")
             else:
                 print("La carpeta no existe.")
 
         elif opcion == "5":
-            archivo_zip = input("Archivo ZIP a restaurar: ")
+            archivo_zip = input("Archivo ZIP a restaurar: ").strip()
             if os.path.exists(archivo_zip):
-                destino = input("Carpeta de destino: ")
-                backup_manager.restaurar_copia(archivo_zip, destino)
+                destino = input("Carpeta de destino: ").strip()
+                
+                # obligamos a poner destino
+                if len(destino) > 0:
+                    backup_manager.restaurar_copia(archivo_zip, destino)
+                else:
+                    print("Error, debes decirme donde guardarlo.")
             else:
-                print("Error: El archivo ZIP no existe.")
+                print("Error, el archivo ZIP no existe.")
 
         elif opcion == "0":
             print("Saliendo")
