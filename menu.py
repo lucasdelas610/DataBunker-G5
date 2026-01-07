@@ -11,6 +11,7 @@ def mostrar_menu():
         print("3. Descifrar Archivo")
         print("4. Crear Backup (Zip)")
         print("5. Restaurar Backup")
+        print("6. Eliminar Archivo Temporal")
         print("0. Salir")
         
         # Uso strip() para que no fallen los espacios
@@ -75,6 +76,32 @@ def mostrar_menu():
                     print("Error, debes decirme donde guardarlo.")
             else:
                 print("Error, el archivo ZIP no existe.")
+
+        elif opcion == "6":
+            archivos_esenciales = ["main.py",
+                                   "menu.py",
+                                   "key_manager.py",
+                                   "crypto_utils",
+                                   "backup_manager.py",
+                                   "clave.key",
+                                   "historial.txt",
+                                   "README.md",
+                ]
+
+            borrar_archivo = input("Introduce el nombre del archivo que quieres eliminar: ")
+
+            if archivo in archivos_esenciales:
+                print("Error: Estos archivos no se pueden eliminar")
+
+            elif os.path.exists(borrar_archivo):
+                confirmacion = input(f"Estas seguro que quieres borrar este archivo: {borrar_archivo}")
+                if confirmacion.lower() == "si":
+                    os.remove(borrar_archivo)
+                    print(f"El archivo ha sido eliminado correctamente")
+                else:
+                    print("El archivo no ha sido eliminado")
+            else:
+                print("El archivo que quieres eliminar no existe")
 
         elif opcion == "0":
             print("Saliendo")
