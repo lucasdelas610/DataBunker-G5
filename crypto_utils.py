@@ -46,3 +46,5 @@ def descifrar_archivo(archivo_encriptado, clave):
         file.write(datos_originales)
     print("Archivo descifrado temporalmente: " + nombre_salida)
     return nombre_salida
+
+    
