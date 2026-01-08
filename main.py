@@ -1,9 +1,6 @@
 import os
 import menu
 
-
-# FJ - 41: Validacion de los archivos
-
 def validar_archivos():
     archivos = [
         "menu.py",

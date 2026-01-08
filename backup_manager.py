@@ -15,14 +15,12 @@ def comprimir_carpeta(carpeta, zip_final): # Validar que existen los archivos
     # Validar carpeta vacía
     contenido = os.listdir(carpeta)
     if len(contenido) == 0:
-        print("La carpeta está vacía, no voy a crear un backup de nada")
+        print("La carpeta está vacía")
         with open("historial.txt", "a") as f:
             f.write("Intento de comprimir carpeta vacia\n")
         return False
 
-
-    # Evitar sobrescribir backups
-    if os.path.exists(zip_final) == True:
+    if os.path.exists(zip_final) == True: # Evitar sobrescribir backups
         print(f"Ya existe un archivo llamado '{zip_final}'.")
         with open("historial.txt", "a") as f:
             f.write(f"Intento de sobrescribir {zip_final}\n")
@@ -40,7 +38,7 @@ def comprimir_carpeta(carpeta, zip_final): # Validar que existen los archivos
         f.write("Backup comprimido creado\n")
     return True
 
-def verificar_restauracio(carpeta_desti): #FJ-21
+def verificar_restauracio(carpeta_desti): 
     if os.path.exists(carpeta_desti):
         fitxers = os.listdir(carpeta_desti)
         if len(fitxers) > 0: #aqui se comprueban posibles fallos, como si la carpeta puede estar vacia o no existe
@@ -56,13 +54,13 @@ def verificar_restauracio(carpeta_desti): #FJ-21
 
 def restaurar_copia(zip_arxiu, carpeta_desti):# Validar formato ZIP
     if zipfile.is_zipfile(zip_arxiu) == False:
-        print("Error: El archivo no es un ZIP válido o está roto.")
+        print(" El archivo no es un ZIP válido o está roto.")
         with open("historial.txt", "a") as f:
-            f.write("ERROR: Intento de restaurar un zip corrupto.\n")
+            f.write(" Intento de restaurar un zip corrupto.\n")
         return
 
     arxiu = zipfile.ZipFile(zip_arxiu, 'r')
-    arxiu.extractall(carpeta_desti) 
+    arxiu.extractall(carpeta_desti)  #descomprimimos todo en la carpeta
     arxiu.close()
     
     # Llamamos a la función para comprobar que todo esta bien
@@ -70,4 +68,4 @@ def restaurar_copia(zip_arxiu, carpeta_desti):# Validar formato ZIP
     
     print(f"Restauració completada a {carpeta_desti}")
     with open("historial.txt", "a") as f:
-        f.write("EXITO: Restauracion completada.\n")
+        f.write(" Restauracion completada.\n")
