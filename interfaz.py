@@ -6,6 +6,7 @@ import crypto_utils
 import backup_manager
 
 def generar():
+<<<<<<< HEAD
     # Intenta generar una clave nueva usando el gestor de claves
     clave = key_manager.generar_clave()
     if clave:
@@ -26,23 +27,48 @@ def cifrar():
     archivo = filedialog.askopenfilename(title="Elige el archivo a cifrar")
     if archivo:
         # Llama a la utilidad de criptografía para procesar el archivo
+=======
+    clave = key_manager.generar_clave()
+    if clave:
+        messagebox.showinfo("Exito", "Clave generada correctamente (clave.key)")
+    else:
+        messagebox.showwarning("Atencion", "La clave ya existe")
+
+def cifrar():
+    clave = key_manager.cargar_clave() # primero se carga la clave
+    if not clave:
+        messagebox.showerror("Error", "No se encuentra la clave (clave.key)")
+        return
+
+    archivo = filedialog.askopenfilename(title="Elige el archivo a cifrar") # abrimos una ventana para elegir el archivo
+    if archivo:
+>>>>>>> origin/Develop
         crypto_utils.cifrar_archivo(archivo, clave)
         messagebox.showinfo("Info", "Revisa la carpeta, deberia estar el .enc")
 
 def descifrar():
+<<<<<<< HEAD
     # Carga la clave necesaria para la operación inversa
+=======
+>>>>>>> origin/Develop
     clave = key_manager.cargar_clave()
     if not clave:
         messagebox.showerror("Error", "Necesitas la clave para descifrar.")
         return
+<<<<<<< HEAD
     # Abre el explorador filtrando solo archivos con extensión .enc (cifrados)
     archivo = filedialog.askopenfilename(title="Elige archivo cifrado", filetypes=[("Archivos ENC", "*.enc")])  # se filtra para ver solo archivos .enc
     if archivo:
         # Recupera el contenido original y devuelve el nombre del archivo restaurado
+=======
+    archivo = filedialog.askopenfilename(title="Elige archivo cifrado", filetypes=[("Archivos ENC", "*.enc")])  # se filtra para ver solo archivos .enc
+    if archivo:
+>>>>>>> origin/Develop
         nombre_salida = crypto_utils.descifrar_archivo(archivo, clave)
         messagebox.showinfo("Hecho", f"Archivo restaurado: {nombre_salida}")
 
 def backup():
+<<<<<<< HEAD
     # Pide al usuario que seleccione qué carpeta completa quiere respaldar
     carpeta = filedialog.askdirectory(title="Selecciona carpeta para hacer backup")  # aqui se elige la carpeta para guardar
     if carpeta:
@@ -53,10 +79,22 @@ def backup():
             if not nombre.endswith(".zip"):
                 nombre += ".zip"
             # Llama al gestor de backup para comprimir la carpeta
+=======
+    carpeta = filedialog.askdirectory(title="Selecciona carpeta para hacer backup")  # aqui se elige la carpeta para guardar
+    if carpeta:
+       
+        nombre = simpledialog.askstring("Nombre", "Nombre del archivo backup (ej: copia.zip):")
+        if nombre:
+            # Solo se puede si es .zip
+            if not nombre.endswith(".zip"):
+                nombre += ".zip"
+            
+>>>>>>> origin/Develop
             resultado = backup_manager.comprimir_carpeta(carpeta, nombre)
             if resultado:
                 messagebox.showinfo("Bien", "Backup creado correctamente.")
             else:
+<<<<<<< HEAD
                 # Si algo sale mal, sugerimos revisar el log de errores
                 messagebox.showerror("Error", "Algo fallo (mira historial.txt)")
 
@@ -65,6 +103,13 @@ def restaurar():
     archivo_zip = filedialog.askopenfilename(title="Elige el ZIP", filetypes=[("Archivos ZIP", "*.zip")])
     if archivo_zip:
         # Pregunta en qué ubicación desea extraer los archivos
+=======
+                messagebox.showerror("Error", "Algo fallo (mira historial.txt)")
+
+def restaurar():
+    archivo_zip = filedialog.askopenfilename(title="Elige el ZIP", filetypes=[("Archivos ZIP", "*.zip")])
+    if archivo_zip:
+>>>>>>> origin/Develop
         destino = filedialog.askdirectory(title="Donde lo descomprimo?")
         if destino:
             backup_manager.restaurar_copia(archivo_zip, destino)
@@ -74,13 +119,21 @@ def restaurar():
 ventana = tk.Tk()
 ventana.title("Programa Cifrado")
 
+<<<<<<< HEAD
 # Define el tamaño de la ventana (Ancho x Alto)
+=======
+
+>>>>>>> origin/Develop
 ventana.geometry("320x380") # estas son las medidas de la ventana
 
 # Etiqueta titulo
 lbl_titulo = tk.Label(ventana, text="DATA BUNKER", font=("Arial", 16))
 lbl_titulo.pack(pady=10)
+<<<<<<< HEAD
 # Creación de botones. Cada botón llama a su función correspondiente mediante 'command'
+=======
+
+>>>>>>> origin/Develop
 tk.Button(ventana, text="1. Generar Clave", command=generar, width=30).pack(pady=10) # Aqui estan todos los botones 
 tk.Button(ventana, text="2. Cifrar Archivo", command=cifrar, width=30).pack(pady=10)
 tk.Button(ventana, text="3. Descifrar Archivo", command=descifrar, width=30).pack(pady=10)

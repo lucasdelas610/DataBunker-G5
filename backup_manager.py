@@ -93,4 +93,9 @@ def restaurar_copia(zip_arxiu, carpeta_desti):  # Validar formato ZIP
     print(f"Restauración completada en {carpeta_desti}")
     # Registramos la restauración en el historial
     with open("historial.txt", "a") as f:
+<<<<<<< HEAD
         f.write("Restauración completada.\n")
+=======
+        f.write("EXITO: Restauracion completada.\n")
+
+>>>>>>> origin/Develop
