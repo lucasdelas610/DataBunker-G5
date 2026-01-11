@@ -15,8 +15,7 @@ def mostrar_menu():
         print("6. Eliminar Archivo Temporal")
         print("0. Salir")
         
-        # Uso strip() para que no fallen los espacios
-        opcion = input("Selecciona una opcion: ").strip()
+        opcion = input("Selecciona una opcion: ").strip() # Usamos strip() para que no fallen los espacios
 
         # Si le das al Enter sin escribir nada, vuelve a empezar
         if opcion == "":
@@ -26,9 +25,14 @@ def mostrar_menu():
             key_manager.generar_clave()
         # Opción 2: Cifrar un archivo
         elif opcion == "2":
+<<<<<<< HEAD
+            clave = key_manager.cargar_clave() 
+            # cargamos la clave primero, si no existe no dejamos cifrar nada
+=======
             # FJ-39 Cargamos la clave desde el archivo
             clave = key_manager.cargar_clave()
             # Si no existe la clave, avisamos al usuario
+>>>>>>> origin/Develop
             if clave is None:
                 print("ATENCION: No se encontro la clave. Usa la opcion 1 primero.")
             else:
@@ -40,7 +44,10 @@ def mostrar_menu():
                     print("Error: El archivo no existe.")
         # Opción 3: Descifrar un archivo
         elif opcion == "3":
+<<<<<<< HEAD
+=======
             # Cargamos la clave necesaria para descifrar
+>>>>>>> origin/Develop
             clave = key_manager.cargar_clave()
             
             if clave is None:
@@ -58,9 +65,8 @@ def mostrar_menu():
             # Comprobamos que la carpeta exista
             if os.path.exists(carpeta):
                 destino = input("Nombre del archivo: ").strip()
-                
-                # obligamos a que el nombre tenga algo escrito
-                if len(destino) > 0:
+            
+                if len(destino) > 0:# obligamos a que el nombre tenga algo escrito
                     backup_manager.comprimir_carpeta(carpeta, destino)
                 else:
                     print("Error, el nombre del archivo no puede estar vacio.")

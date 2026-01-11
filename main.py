@@ -2,8 +2,18 @@
 import os
 import zipfile
 
+<<<<<<< HEAD
+def validar_archivos():
+    archivos = [
+        "menu.py",
+        "key_manager.py",
+        "crypto_utils.py",
+        "backup_manager.py"
+        ]
+=======
 
 
+>>>>>>> origin/Develop
 
 
 # FJ-22
