@@ -1,31 +1,30 @@
 # DataBunker-AA5
 
-Trabajo hecho por:
-
-Anna Gual Poblet 
-Lena Boajram Makarem 
-Andrea Olivas Vazquez 
-Lucas Delas De Esteban 
-Pol Latorre Cañisà
-
-Sprint: Claves y Cifrado (Tareas 12-23) En esta parte del trabajo hemos hecho lo necesario para crear la clave de seguridad y encriptar los archivos.
-
-Qué hemos hecho Crear la clave: El programa ya sabe generar una clave segura usando Fernet.
-
-Guardar la clave: La clave se guarda en un archivo llamado key.key. Sin esto no se puede hacer nada.
-
-Encriptar: Ya podemos coger los archivos y convertirlos a formato cifrado para que no se puedan leer.
-
-Validaciones: Hemos puesto comprobaciones para que no falle si falta la clave o el archivo.
-
-Qué necesitas instalar Para que funcione nuestro código, hay que instalar la librería de criptografía:
-
-pip install cryptography Cómo probarlo Hemos hecho unos scripts para ver si funciona todo bien:
-
-Prueba de la clave: Ejecuta la función de generar clave. Debería aparecer el archivo key.key en la carpeta.
-
 <<<<<<< HEAD
-Prueba de cifrado: Intenta cifrar un archivo de prueba. Si al abrir el archivo resultante salen símbolos raros, es que ha funcionado bien.
+Proyecto Data Bunker
+1. Descripción del proyecto
+Trabajo hecho por: Anna Gual Poblet, Lena Boajram Makarem, Andrea Olivas Vazquez, Lucas Delas De Esteban y Pol Latorre Cañisà. En este Sprint (Tareas 12-23) hemos hecho lo necesario para crear claves de seguridad y encriptar archivos. El problema que resolvemos es coger archivos y convertirlos a formato cifrado para que nadie los pueda leer sin permiso.
+2. Requisitos de sistema y dependencias
+Para que funcione nuestro código, aparte de tener Python, hay que instalar la librería de criptografía. Es lo único externo que hemos usado para que la seguridad con Fernet vaya bien. Si no tienes esto instalado, el programa no arrancará porque le faltarán herramientas.
+3. Pasos de instalación (dev)
+Simplemente descarga los archivos del proyecto. Luego, abre la consola y escribe el comando: pip install cryptography. No hay que hacer nada más complicado, solo asegúrate de tener todos los .py en la misma carpeta para que se encuentren entre ellos.
+4. Instrucciones detalladas de uso
+Para probarlo, ejecuta el menú (main.py o interfaz.py). Lo primero es la "Prueba de la clave": dale a generar y debería aparecer el archivo key.key en la carpeta; sin esto no se puede hacer nada. Luego haz la "Prueba de cifrado": intenta cifrar un archivo de prueba. Si al abrir el archivo resultante salen símbolos raros, es que ha funcionado bien.
 =======
-Prueba de cifrado: Intenta cifrar un archivo de prueba. Si al abrir el archivo resultante salen símbolos raros, es que ha funcionado bien.
->>>>>>> origin/main
+
+1. Descripción del proyecto
+Trabajo hecho por: Anna Gual Poblet, Lena Boajram Makarem, Andrea Olivas Vazquez, Lucas Delas De Esteban y Pol Latorre Cañisà. 
+En este Sprint (Tareas 12-23) hemos hecho lo necesario para crear claves de seguridad y encriptar archivos. El problema que resolvemos es coger archivos y convertirlos a formato cifrado para que nadie los pueda leer sin permiso.
+
+2. Requisitos de sistema y dependencias
+Para que funcione nuestro código, aparte de tener Python, hay que instalar la librería de criptografía. Es lo único externo que hemos usado para que la seguridad con Fernet vaya bien. Si no tienes esto instalado, el programa no arrancará porque le faltarán herramientas.
+
+3. Pasos de instalación (dev)
+Simplemente descarga los archivos del proyecto. Luego, abre la consola y escribe el comando: pip install cryptography. No hay que hacer nada más complicado, solo asegúrate de tener todos los .py en la misma carpeta para que se encuentren entre ellos.
+
+4. Instrucciones detalladas de uso
+Para probarlo, ejecuta el menú (main.py o interfaz.py). Lo primero es la "Prueba de la clave": dale a generar y debería aparecer el archivo key.key en la carpeta; sin esto no se puede hacer nada. Luego haz la "Prueba de cifrado": intenta cifrar un archivo de prueba. Si al abrir el archivo resultante salen símbolos raros, es que ha funcionado bien.
+
+>>>>>>> lucasdelas610/Develop
+5. Breve descripción de la estructura del código
+Hemos separado el código en partes. En key_manager.py el programa aprende a generar y guardar la clave segura. En crypto_utils.py está la lógica para encriptar y desencriptar. En main.py y menu.py hemos puesto validaciones para que el programa no falle si falta la clave o el archivo.
