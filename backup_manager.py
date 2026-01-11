@@ -5,7 +5,7 @@ import os
 
 
 
-def comprimir_carpeta(carpeta, zip_final): # Validar que existen los archivos
+def comprimir_carpeta(carpeta, zip_final): # # Función que comprime una carpeta en un archivo ZIP
     if os.path.exists(carpeta) == False:
         print(" La carpeta no existe.")
         with open("historial.txt", "a") as f:

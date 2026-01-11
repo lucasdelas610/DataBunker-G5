@@ -6,6 +6,7 @@ import crypto_utils
 import backup_manager
 
 def generar():
+    # Intenta generar una clave nueva usando el gestor de claves
     clave = key_manager.generar_clave()
     if clave:
         messagebox.showinfo("Exito", "Clave generada correctamente (clave.key)")
@@ -13,17 +14,18 @@ def generar():
         messagebox.showwarning("Atencion", "La clave ya existe")
 
 def cifrar():
+    # Intenta cargar la clave existente desde el archivo
     clave = key_manager.cargar_clave() # primero se carga la clave
     if not clave:
         messagebox.showerror("Error", "No se encuentra la clave (clave.key)")
         return
-
+     # Abre un explorador de archivos para que el usuario seleccione qué quiere proteger
     archivo = filedialog.askopenfilename(title="Elige el archivo a cifrar") # abrimos una ventana para elegir el archivo
     if archivo:
         crypto_utils.cifrar_archivo(archivo, clave)
         messagebox.showinfo("Info", "Revisa la carpeta, deberia estar el .enc")
 
-def descifrar():
+def descifrar(): # Carga la clave necesaria para la operación inversa
     clave = key_manager.cargar_clave()
     if not clave:
         messagebox.showerror("Error", "Necesitas la clave para descifrar.")
@@ -39,9 +41,9 @@ def backup():
        
         nombre = simpledialog.askstring("Nombre", "Nombre del archivo backup (ej: copia.zip):")
         if nombre:
-            # Solo se puede si es .zip
+            
             if not nombre.endswith(".zip"):
-                nombre += ".zip"
+                nombre += ".zip" #  si el usuario no escribió ".zip", se lo agregamos automáticamente
             
             resultado = backup_manager.comprimir_carpeta(carpeta, nombre)
             if resultado:
@@ -49,7 +51,7 @@ def backup():
             else:
                 messagebox.showerror("Error", "Algo fallo (mira historial.txt)")
 
-def restaurar():
+def restaurar(): # Selecciona el archivo ZIP que contiene el respaldo
     archivo_zip = filedialog.askopenfilename(title="Elige el ZIP", filetypes=[("Archivos ZIP", "*.zip")])
     if archivo_zip:
         destino = filedialog.askdirectory(title="Donde lo descomprimo?")

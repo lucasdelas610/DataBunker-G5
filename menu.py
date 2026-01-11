@@ -3,7 +3,9 @@ import key_manager
 import crypto_utils
 import backup_manager
 
+# Funcion principal que muestra el menu y gestiona las opciones
 def mostrar_menu():
+    # Bucle infinito hasta que el usuario decida salir
     while True:
         print("MENU")
         print("1. Generar Clave")
@@ -14,20 +16,21 @@ def mostrar_menu():
         print("6. Eliminar Archivo Temporal")
         print("0. Salir")
         
-        opcion = input("Selecciona una opcion: ").strip() # Usamos strip() para que no fallen los espacios
+        # Uso strip() para que no fallen los espacios
+        opcion = input("Selecciona una opcion: ").strip()
 
         # Si le das al Enter sin escribir nada, vuelve a empezar
         if opcion == "":
             continue
-
+        # Opción 1: Generar una clave de cifrado
         if opcion == "1":
             key_manager.generar_clave()
-        
+        # Opción 2: Cifrar un archivo
         elif opcion == "2":
-            clave = key_manager.cargar_clave() 
-            # cargamos la clave primero, si no existe no dejamos cifrar nada
+            clave = key_manager.cargar_clave()
+            # Si no existe la clave, avisamos al usuario
             if clave is None:
-                print("ATENCION: No se encontro la clave. Usa la opcion 1 primero.")
+                print("No se ha encontrado la clave. Usa la opcion 1 primero.")
             else:
                 archivo = input("Archivo a cifrar: ")
                 # Validamos si el archivo existe 
@@ -35,7 +38,7 @@ def mostrar_menu():
                     crypto_utils.cifrar_archivo(archivo, clave)
                 else:
                     print("Error: El archivo no existe.")
-
+        # Opción 3: Descifrar un archivo
         elif opcion == "3":
             clave = key_manager.cargar_clave()
             
@@ -47,13 +50,14 @@ def mostrar_menu():
                     crypto_utils.descifrar_archivo(archivo, clave)
                 else:
                     print("Error: El archivo no existe.")
-
+        # Opción 4: Crear un backup comprimido (ZIP)
         elif opcion == "4":
             carpeta = input("Carpeta para backup: ").strip()
             if os.path.exists(carpeta):
                 destino = input("Nombre del archivo: ").strip()
-            
-                if len(destino) > 0:# obligamos a que el nombre tenga algo escrito
+                
+                # obligamos a que el nombre tenga algo escrito
+                if len(destino) > 0:
                     backup_manager.comprimir_carpeta(carpeta, destino)
                 else:
                     print("Error, el nombre del archivo no puede estar vacio.")

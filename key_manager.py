@@ -10,11 +10,13 @@ def generar_clave(nom_fitxer = "clave.key"):
         f.write(clave)
     return clave
 
-
+# Función para cargar una clave de cifrado existente
 def cargar_clave(nom_fitxer = "clave.key"):
+    # Comprobamos si el archivo de la clave existe
     if os.path.exists(nom_fitxer) == False:
         print("Error: No encuentro el archivo de la clave.")
         return None
     with open (nom_fitxer, "rb") as f: # Lee el contenido del archivo para cargarlo
         clave_cargada = f.read()
+    # Devolvemos la clave cargada desde el archivo
     return clave_cargada
